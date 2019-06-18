@@ -1,0 +1,38 @@
+##################################################################################################
+# Customers service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: clientjar
+  labels:
+    app: clientjar
+    service: clientjar
+spec:
+  ports:
+  - port: 8090
+    name: http
+  selector:
+    app: clientjar
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clientjar-deployment
+  labels:
+    app: clientjar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clientjar
+  template:
+    metadata:
+      labels:
+        app: clientjar
+    spec:
+      containers:
+        - name: clientjar
+          image: edgargmaya/clientjar:latest
+          ports:
+          - containerPort: 8090

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clientjar-deployment
+  labels:
+    app: clientjar
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: clientjar
+  template:
+    metadata:
+      labels:
+        app: clientjar
+    spec:
+      containers:
+        - name: demojar
+          image: edgargmaya/clientjar:latest
+          ports:
+          - containerPort: 8090
